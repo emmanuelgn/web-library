@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const userRoutes = require('./routes/userRoutes');
 
 dotenv.config();
 
@@ -25,11 +26,12 @@ db.connect((err) => {
 
 app.use(cors());
 app.use(express.json());
+app.use('/api/users', userRoutes);
 
 app.get('/', (req, res) => {
   res.send('Library API is working!');
 });
 
 app.listen(port, () => {
-  console.log(`Servidor rodando na porta ${port}`);
+  console.log(`Server running on port ${port}`);
 });
